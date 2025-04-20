@@ -1,1 +1,453 @@
+/* Base variables - Light, attention-gaining color scheme */
+:root {
+  --bg-color: #f9f7ff;                /* Light lavender background */
+  --text-color: #2d3748;              /* Dark slate for text */
+  --accent-color: #6366f1;            /* Indigo - attention-grabbing */
+  --accent-secondary: #f472b6;        /* Pink - secondary accent */
+  --section-bg: rgba(255, 255, 255, 0.9); /* Almost white sections */
+  --border-color: #e2e8f0;            /* Light gray border */
+  --shadow: 0 4px 6px rgba(99, 102, 241, 0.1); /* Subtle shadow */
+  --transition: all 0.3s ease;
+  --expanded-bg: #f0f5ff;             /* Very light blue for expanded sections */
+  --expanded-border: rgba(99, 102, 241, 0.5); /* Accent border */
+  --highlight-color: #fef3c7;         /* Light yellow highlight */
+  --button-hover: #818cf8;            /* Lighter indigo for hover */
+}
+
+/* Dark theme - still using attention-gaining colors but darker base */
+.dark {
+  --bg-color: #1a1a2e;                /* Dark blue background */
+  --text-color: #e2e8f0;              /* Light gray text */
+  --accent-color: #818cf8;            /* Lighter indigo for dark mode */
+  --accent-secondary: #f9a8d4;        /* Lighter pink for dark mode */
+  --section-bg: rgba(30, 30, 60, 0.9); /* Dark blue-purple sections */
+  --border-color: #4a5568;            /* Medium gray border */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --expanded-bg: rgba(99, 102, 241, 0.15); /* Indigo tint */
+  --expanded-border: rgba(129, 140, 248, 0.6); /* Lighter accent */
+  --highlight-color: #3f3f73;         /* Dark purple highlight */
+  --button-hover: #a5b4fc;            /* Even lighter indigo for hover */
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: var(--transition);
+  background-image: linear-gradient(120deg, rgba(99, 102, 241, 0.05), rgba(244, 114, 182, 0.05));
+  background-attachment: fixed;
+}
+
+/* Container for better spacing */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--section-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  border-bottom: 1px solid var(--border-color);
+}
+
+h1 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent-color);
+  font-size: 1.8rem;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+#theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(99, 102, 241, 0.2);
+  background: linear-gradient(90deg, var(--button-hover), var(--accent-secondary));
+}
+
+/* Search container */
+.search-container {
+  margin: 30px auto;
+  max-width: 600px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  background-color: var(--section-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+#searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+  border-color: var(--accent-color);
+}
+
+/* Hexagonal grid layout for sections */
+.sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Section styling with hexagonal influence */
+section {
+  position: relative;
+  background-color: var(--section-bg);
+  border-radius: 12px;
+  padding: 25px;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-secondary) 100%);
+  opacity: 0.1;
+  border-radius: 12px;
+  transition: var(--transition);
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(99, 102, 241, 0.15);
+}
+
+section:hover::before {
+  opacity: 0.15;
+}
+
+/* Toggle section button styling */
+.toggle-section {
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-weight: 500;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toggle-section::after {
+  content: '▼';
+  font-size: 0.8em;
+  transition: var(--transition);
+}
+
+.toggle-section.active::after {
+  transform: rotate(180deg);
+}
+
+.toggle-section:hover {
+  background: linear-gradient(90deg, var(--button-hover), var(--accent-secondary));
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Content styling - ENHANCED FOR ATTENTION */
+.section-content {
+  padding: 15px;
+  transition: var(--transition);
+  max-height: 1000px;
+  overflow: hidden;
+  background-color: var(--expanded-bg);
+  border-radius: 8px;
+  border-left: 4px solid var(--expanded-border);
+  box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.1);
+  position: relative;
+}
+
+/* Animated highlight effect for expanded sections */
+.section-content:not(.hidden)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(99, 102, 241, 0) 0%, 
+    rgba(99, 102, 241, 0.1) 50%, 
+    rgba(99, 102, 241, 0) 100%);
+  background-size: 200% 200%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+.hidden {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  border-left: 0;
+}
+
+/* Headings in expanded sections - ENHANCED */
+.section-content:not(.hidden) h2 {
+  color: var(--accent-color);
+  font-weight: 600;
+  border-bottom: 2px solid var(--expanded-border);
+  padding-bottom: 8px;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.section-content:not(.hidden) h3 {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Important text in expanded sections */
+.section-content:not(.hidden) strong, 
+.section-content:not(.hidden) b {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+/* Lists in expanded sections */
+.section-content:not(.hidden) ul,
+.section-content:not(.hidden) ol {
+  padding-left: 20px;
+}
+
+.section-content:not(.hidden) li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.section-content:not(.hidden) ul li::before {
+  content: '•';
+  color: var(--accent-secondary);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Highlight important paragraphs */
+.section-content:not(.hidden) p:nth-of-type(1) {
+  background-color: var(--highlight-color);
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent-secondary);
+}
+
+/* Headings */
+h2, h3 {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+/* Links */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+  text-decoration: underline;
+}
+
+/* Code blocks */
+pre, code {
+  background-color: rgba(99, 102, 241, 0.1);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-color);
+}
+
+.dark pre, .dark code {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Tab-like navigation if needed */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.tab.active {
+  border-bottom-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sections-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #theme-toggle {
+    margin-top: 15px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-color), var(--accent-secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--button-hover), var(--accent-secondary));
+}
+
+/* Additional attention-focusing elements */
+.key-point {
+  background-color: var(--highlight-color);
+  border-left: 3px solid var(--accent-secondary);
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+}
+
+/* Pulsing effect for very important elements */
+.important {
+  position: relative;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+/* Highlighted search text */
+.search-highlight {
+  background-color: rgba(255, 255, 0, 0.4); /* Light yellow highlight */
+  border-radius: 2px;
+  padding: 0 2px;
+  animation: highlight-pulse 1.5s infinite;
+  font-weight: 500;
+}
+
+/* For dark mode */
+.dark .search-highlight {
+  background-color: rgba(255, 255, 0, 0.3); /* Slightly darker yellow for dark mode */
+  color: #ffffff;
+}
+
+/* Subtle pulsing animation for highlights */
+@keyframes highlight-pulse {
+  0% { background-color: rgba(255, 255, 0, 0.4); }
+  50% { background-color: rgba(255, 255, 0, 0.6); }
+  100% { background-color: rgba(255, 255, 0, 0.4); }
+}
+
+/* Dark mode version of the animation */
+.dark .search-highlight {
+  animation: highlight-pulse-dark 1.5s infinite;
+}
+
+@keyframes highlight-pulse-dark {
+  0% { background-color: rgba(255, 255, 0, 0.3); }
+  50% { background-color: rgba(255, 255, 0, 0.5); }
+  100% { background-color: rgba(255, 255, 0, 0.3); }
+}
+<link rel="stylesheet" href="styles.css">
+<script src="script.js"></script>
 /* Test comment */
